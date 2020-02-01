@@ -12,6 +12,7 @@ class Upload extends Model
      * @var array
      */
     protected $fillable = ['original_name'];
+    protected $path;
 
     /**
      * Generate file name to store upload on local filesystem.

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Services\EchoScreenXMLParser;
+use App\Http\Services\SeraXMLParser;
 use App\Upload;
 use DB;
 use Storage;
@@ -12,8 +12,9 @@ class UploadsController extends Controller
 {
 
     const UPLOADS_DISK = 'uploads';
+    protected $xmlParser;
 
-    public function __construct(EchoScreenXMLParser $xmlParser)
+    public function __construct(SeraXMLParser $xmlParser)
     {
         $this->xmlParser = $xmlParser;
     }

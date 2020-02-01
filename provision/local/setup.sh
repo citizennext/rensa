@@ -11,7 +11,7 @@ echo "Installing application stack..."
 export DEBIAN_FRONTEND=noninteractive
 apt-get install -y \
     apache2 mysql-server mysql-client \
-    libapache2-mod-php php-mcrypt php-mbstring php-curl php-mysql \
+    libapache2-mod-php php-mcrypt php-mbstring php-curl php-mysql php7.0-xml \
     screen git htop unzip \
     redis-server redis-tools
 a2enmod rewrite
@@ -32,17 +32,7 @@ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/loca
 cd $src && composer install
 cd -
 
-echo "Installing Xdebug..."
-apt-get install -y php-dev
-pecl install xdebug
-cat <<EOF > /etc/php/7.0/mods-available/xdebug.ini
-zend_extension=xdebug.so
-xdebug.remote_enable=1
-xdebug.remote_host=192.168.60.1
-xdebug.var_display_max_data=4096
-xdebug.var_display_max_depth=4
-EOF
-phpenmod xdebug
+
 service apache2 reload
 
 echo "Configuring Laravel environment..."
